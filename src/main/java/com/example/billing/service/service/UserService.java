@@ -14,6 +14,10 @@ public class UserService {
         return userRepo.save(user);
     }
 
+    public UserEntity updateUser(UserEntity user){
+        return userRepo.save(user);
+    }
+
     public UserEntity getUser(Long id) {
         return userRepo.findById(id).get();
     }

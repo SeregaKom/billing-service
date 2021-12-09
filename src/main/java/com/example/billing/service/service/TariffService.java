@@ -1,6 +1,7 @@
 package com.example.billing.service.service;
 
 import com.example.billing.service.entity.TariffEntity;
+import com.example.billing.service.entity.UserEntity;
 import com.example.billing.service.repository.TariffRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,10 @@ public class TariffService {
     private TariffRepo tariffRepo;
 
     public TariffEntity addTariff(TariffEntity tariff) {
+        return tariffRepo.save(tariff);
+    }
+
+    public TariffEntity updateTariff(TariffEntity tariff){
         return tariffRepo.save(tariff);
     }
 

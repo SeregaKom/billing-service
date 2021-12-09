@@ -14,5 +14,4 @@ public class TariffEntity {
     private Long id;
     private String name;
     private double pricePerMinute;
-
 }
