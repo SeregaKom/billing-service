@@ -1,5 +1,7 @@
-package com.example.billing.service.entity;
+package com.example.billing.service.service;
 
+import com.example.billing.service.entity.UserEntity;
+import com.example.billing.service.entity.UserTariffEntity;
 import com.example.billing.service.repository.UserRepo;
 import com.example.billing.service.repository.UserTariffRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Service

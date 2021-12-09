@@ -1,6 +1,6 @@
 package com.example.billing.service.controller;
 
-import com.example.billing.service.entity.BalanceService;
+import com.example.billing.service.service.BalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
