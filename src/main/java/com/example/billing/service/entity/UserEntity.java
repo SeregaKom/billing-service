@@ -19,4 +19,8 @@ public class UserEntity {
     private String surname;
     private String address;
     private Double balance;
+
+    public String toString() {
+        return "Name: '" + this.name + "', Surname: '" + this.surname;
+    }
 }
