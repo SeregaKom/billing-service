@@ -20,6 +20,7 @@ public class UserTariffService {
 
     public UserTariffEntity addService(UserTariffEntity service, Long userId, Long tariffId) {
         // TODO: запилить проверку, что такой пользователь и тариф существует
+        //TODO: а также что такой тариф уже есть у пользователя
         var user = userRepo.findById(userId).get();
         var tariff = tariffRepo.findById(tariffId).get();
 
