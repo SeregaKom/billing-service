@@ -103,6 +103,7 @@ public class BalanceService {
                 activatedUserServices) {
             service.setIsActivated(false);
             userTariffRepo.save(service);
+
             System.out.println(String.format("[%s] Недостаточно средств на счету. Услуга по тарифу %s отключена",
                     service.getUser(), service.getTariff().getName()));
         }

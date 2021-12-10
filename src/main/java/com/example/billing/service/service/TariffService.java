@@ -11,18 +11,34 @@ public class TariffService {
     @Autowired
     private TariffRepo tariffRepo;
 
+    /**Добавить тариф
+     * @param tariff Тариф
+     * @return
+     */
     public TariffEntity addTariff(TariffEntity tariff) {
         return tariffRepo.save(tariff);
     }
 
+    /**Обновить тариф
+     * @param tariff Тариф
+     * @return
+     */
     public TariffEntity updateTariff(TariffEntity tariff){
         return tariffRepo.save(tariff);
     }
 
+    /**Получить тариф
+     * @param id Идентификатор тарифа
+     * @return
+     */
     public TariffEntity getTariff(Long id) {
         return tariffRepo.findById(id).get();
     }
 
+    /**Удалить тариф
+     * @param id Идентификатор тарифа
+     * @return
+     */
     public Long deleteTariff(Long id) {
         tariffRepo.deleteById(id);
         return id;

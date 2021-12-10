@@ -1,6 +1,8 @@
 package com.example.billing.service.controller;
 
 import com.example.billing.service.entity.UserTariffEntity;
+import com.example.billing.service.exception.NotFoundTariffByIdExtension;
+import com.example.billing.service.exception.NotFoundUserByIdExtension;
 import com.example.billing.service.service.UserTariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,10 @@ public class UserTariffController {
     public ResponseEntity addService(@RequestBody UserTariffEntity service, @RequestParam Long userId, @RequestParam Long tariffId) {
         try {
             return ResponseEntity.ok(userTariffService.addService(service, userId, tariffId));
+        } catch (NotFoundUserByIdExtension e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (NotFoundTariffByIdExtension e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -25,6 +31,10 @@ public class UserTariffController {
     public ResponseEntity updateService(@RequestBody UserTariffEntity service, @RequestParam Long userId, @RequestParam Long tariffId) {
         try {
             return ResponseEntity.ok(userTariffService.updateService(service, userId, tariffId));
+        } catch (NotFoundUserByIdExtension e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (NotFoundTariffByIdExtension e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
