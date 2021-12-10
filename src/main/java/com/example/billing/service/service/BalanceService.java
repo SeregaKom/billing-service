@@ -21,6 +21,13 @@ public class BalanceService {
     @Autowired
     private UserTariffRepo userTariffRepo;
 
+    /**
+     * Пополнить баланс
+     *
+     * @param userId Идентификатор пользователя
+     * @param value  Сумма для зачислления
+     * @return
+     */
     public Double topUpBalance(Long userId, Double value) {
         var user = userRepo.findById(userId).get();
 
@@ -28,6 +35,21 @@ public class BalanceService {
         user.setBalance(balance);
 
         userRepo.save(user);
+
+        if (balance > 0) {
+            var services = StreamSupport.stream(userTariffRepo.findByUserId(userId).spliterator(), false);
+            var deactivateServices = services
+                    .filter(service -> service.getIsActivated() == false)
+                    .toList();
+
+            for (var service :
+                    deactivateServices) {
+                service.setIsActivated(true);
+                userTariffRepo.save(service);
+
+                System.out.println(String.format("[%s] Услуга по тарифу %s восстановлена", user, service.getTariff().getName()));
+            }
+        }
 
         return balance;
     }
@@ -77,8 +99,8 @@ public class BalanceService {
     }
 
     private void deactivateServices(List<UserTariffEntity> activatedUserServices) {
-        for (var service : activatedUserServices
-        ) {
+        for (var service :
+                activatedUserServices) {
             service.setIsActivated(false);
             userTariffRepo.save(service);
             System.out.println(String.format("[%s] Недостаточно средств на счету. Услуга по тарифу %s отключена",
