@@ -7,7 +7,6 @@ import com.example.billing.service.repository.TariffRepo;
 import com.example.billing.service.repository.UserRepo;
 import com.example.billing.service.repository.UserTariffRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,17 +26,13 @@ public class UserTariffService {
      */
     public UserTariffEntity addService(UserTariffEntity service, Long userId, Long tariffId)
             throws NotFoundUserByIdExtension, NotFoundTariffByIdExtension {
-        var user = userRepo.findById(userId);
-        if (user.isEmpty()) {
-            throw new NotFoundUserByIdExtension(String.format("Не удалось найти пользователя по идентификатору %s", userId));
-        }
-        var tariff = tariffRepo.findById(tariffId);
-        if (tariff.isEmpty()) {
-            throw new NotFoundTariffByIdExtension(String.format("Не удалось найти тариф по идентификатору %s", tariffId));
-        }
+        var user = userRepo.findById(userId)
+                .orElseThrow(() -> new NotFoundUserByIdExtension(userId));
+        var tariff = tariffRepo.findById(tariffId)
+                .orElseThrow(() -> new NotFoundTariffByIdExtension(tariffId));
 
-        service.setUser(user.get());
-        service.setTariff(tariff.get());
+        service.setUser(user);
+        service.setTariff(tariff);
 
         return userTariffRepo.save(service);
     }
@@ -52,17 +47,13 @@ public class UserTariffService {
      */
     public UserTariffEntity updateService(UserTariffEntity service, Long userId, Long tariffId)
             throws NotFoundUserByIdExtension, NotFoundTariffByIdExtension {
-        var user = userRepo.findById(userId);
-        if (user.isEmpty()) {
-            throw new NotFoundUserByIdExtension(String.format("Не удалось найти пользователя по идентификатору %s", userId));
-        }
-        var tariff = tariffRepo.findById(tariffId);
-        if (tariff.isEmpty()) {
-            throw new NotFoundTariffByIdExtension(String.format("Не удалось найти тариф по идентификатору %s", tariffId));
-        }
+        var user = userRepo.findById(userId)
+                .orElseThrow(() -> new NotFoundUserByIdExtension(userId));
+        var tariff = tariffRepo.findById(tariffId)
+                .orElseThrow(() -> new NotFoundTariffByIdExtension(tariffId));
 
-        service.setUser(user.get());
-        service.setTariff(tariff.get());
+        service.setUser(user);
+        service.setTariff(tariff);
 
         return userTariffRepo.save(service);
     }
