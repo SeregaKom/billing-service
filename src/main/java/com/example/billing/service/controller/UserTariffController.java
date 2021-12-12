@@ -1,11 +1,11 @@
 package com.example.billing.service.controller;
 
 import com.example.billing.service.entity.UserTariffEntity;
-import com.example.billing.service.exception.NotFoundTariffByIdExtension;
-import com.example.billing.service.exception.NotFoundUserByIdExtension;
+import com.example.billing.service.exception.NotFoundServiceByIdException;
+import com.example.billing.service.exception.NotFoundTariffByIdException;
+import com.example.billing.service.exception.NotFoundUserByIdException;
 import com.example.billing.service.service.UserTariffService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +19,9 @@ public class UserTariffController {
     public ResponseEntity addService(@RequestBody UserTariffEntity service, @RequestParam Long userId, @RequestParam Long tariffId) {
         try {
             return ResponseEntity.ok(userTariffService.addService(service, userId, tariffId));
-        } catch (NotFoundUserByIdExtension e) {
+        } catch (NotFoundUserByIdException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (NotFoundTariffByIdExtension e) {
+        } catch (NotFoundTariffByIdException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -32,9 +32,9 @@ public class UserTariffController {
     public ResponseEntity updateService(@RequestBody UserTariffEntity service, @RequestParam Long userId, @RequestParam Long tariffId) {
         try {
             return ResponseEntity.ok(userTariffService.updateService(service, userId, tariffId));
-        } catch (NotFoundUserByIdExtension e) {
+        } catch (NotFoundUserByIdException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (NotFoundTariffByIdExtension e) {
+        } catch (NotFoundTariffByIdException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -45,6 +45,8 @@ public class UserTariffController {
     public ResponseEntity getService(@RequestParam Long id) {
         try {
             return ResponseEntity.ok(userTariffService.getService(id));
+        } catch (NotFoundServiceByIdException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -54,7 +56,9 @@ public class UserTariffController {
     public ResponseEntity deleteService(@RequestParam Long id) {
         try {
             return ResponseEntity.ok(userTariffService.deleteService(id));
-        } catch (Exception e) {
+        } catch (NotFoundServiceByIdException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

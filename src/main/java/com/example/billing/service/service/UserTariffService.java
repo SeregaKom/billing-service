@@ -1,8 +1,9 @@
 package com.example.billing.service.service;
 
 import com.example.billing.service.entity.UserTariffEntity;
-import com.example.billing.service.exception.NotFoundTariffByIdExtension;
-import com.example.billing.service.exception.NotFoundUserByIdExtension;
+import com.example.billing.service.exception.NotFoundServiceByIdException;
+import com.example.billing.service.exception.NotFoundTariffByIdException;
+import com.example.billing.service.exception.NotFoundUserByIdException;
 import com.example.billing.service.repository.TariffRepo;
 import com.example.billing.service.repository.UserRepo;
 import com.example.billing.service.repository.UserTariffRepo;
@@ -25,11 +26,11 @@ public class UserTariffService {
      * @return
      */
     public UserTariffEntity addService(UserTariffEntity service, Long userId, Long tariffId)
-            throws NotFoundUserByIdExtension, NotFoundTariffByIdExtension {
+            throws NotFoundUserByIdException, NotFoundTariffByIdException {
         var user = userRepo.findById(userId)
-                .orElseThrow(() -> new NotFoundUserByIdExtension(userId));
+                .orElseThrow(() -> new NotFoundUserByIdException(userId));
         var tariff = tariffRepo.findById(tariffId)
-                .orElseThrow(() -> new NotFoundTariffByIdExtension(tariffId));
+                .orElseThrow(() -> new NotFoundTariffByIdException(tariffId));
 
         service.setUser(user);
         service.setTariff(tariff);
@@ -46,11 +47,11 @@ public class UserTariffService {
      * @return
      */
     public UserTariffEntity updateService(UserTariffEntity service, Long userId, Long tariffId)
-            throws NotFoundUserByIdExtension, NotFoundTariffByIdExtension {
+            throws NotFoundUserByIdException, NotFoundTariffByIdException {
         var user = userRepo.findById(userId)
-                .orElseThrow(() -> new NotFoundUserByIdExtension(userId));
+                .orElseThrow(() -> new NotFoundUserByIdException(userId));
         var tariff = tariffRepo.findById(tariffId)
-                .orElseThrow(() -> new NotFoundTariffByIdExtension(tariffId));
+                .orElseThrow(() -> new NotFoundTariffByIdException(tariffId));
 
         service.setUser(user);
         service.setTariff(tariff);
@@ -65,7 +66,7 @@ public class UserTariffService {
      * @return
      */
     public UserTariffEntity getService(Long id) {
-        return userTariffRepo.findById(id).get();
+        return userTariffRepo.findById(id).orElseThrow(()-> new NotFoundServiceByIdException(id));
     }
 
     /**
@@ -75,6 +76,7 @@ public class UserTariffService {
      * @return
      */
     public Long deleteService(Long id) {
+        userTariffRepo.findById(id).orElseThrow(()-> new NotFoundServiceByIdException(id));
         userTariffRepo.deleteById(id);
         return id;
     }
