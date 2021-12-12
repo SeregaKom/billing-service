@@ -4,6 +4,7 @@ import com.example.billing.service.entity.UserEntity;
 import com.example.billing.service.entity.UserTariffEntity;
 import com.example.billing.service.repository.UserRepo;
 import com.example.billing.service.repository.UserTariffRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,10 @@ import java.util.TimerTask;
 import java.util.stream.StreamSupport;
 
 @Service
+@RequiredArgsConstructor
 public class BalanceService {
-    @Autowired
-    private UserRepo userRepo;
-
-    @Autowired
-    private UserTariffRepo userTariffRepo;
+    private final UserRepo userRepo;
+    private final UserTariffRepo userTariffRepo;
 
     /**
      * Пополнить баланс

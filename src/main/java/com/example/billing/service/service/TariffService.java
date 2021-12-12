@@ -3,13 +3,14 @@ package com.example.billing.service.service;
 import com.example.billing.service.entity.TariffEntity;
 import com.example.billing.service.entity.UserEntity;
 import com.example.billing.service.repository.TariffRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class TariffService {
-    @Autowired
-    private TariffRepo tariffRepo;
+    private final TariffRepo tariffRepo;
 
     /**Добавить тариф
      * @param tariff Тариф

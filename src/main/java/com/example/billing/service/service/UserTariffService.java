@@ -6,19 +6,16 @@ import com.example.billing.service.exception.NotFoundUserByIdExtension;
 import com.example.billing.service.repository.TariffRepo;
 import com.example.billing.service.repository.UserRepo;
 import com.example.billing.service.repository.UserTariffRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserTariffService {
-    @Autowired
-    private UserTariffRepo userTariffRepo;
-
-    @Autowired
-    private UserRepo userRepo;
-
-    @Autowired
-    private TariffRepo tariffRepo;
+    private final UserTariffRepo userTariffRepo;
+    private final UserRepo userRepo;
+    private final TariffRepo tariffRepo;
 
     /**
      * Подключить услугу
