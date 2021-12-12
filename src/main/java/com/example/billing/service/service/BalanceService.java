@@ -5,7 +5,7 @@ import com.example.billing.service.entity.UserTariffEntity;
 import com.example.billing.service.repository.UserRepo;
 import com.example.billing.service.repository.UserTariffRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +16,7 @@ import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BalanceService {
     private final UserRepo userRepo;
     private final UserTariffRepo userTariffRepo;
@@ -46,7 +47,7 @@ public class BalanceService {
                 service.setIsActivated(true);
                 userTariffRepo.save(service);
 
-                System.out.println(String.format("[%s] Услуга по тарифу %s восстановлена", user, service.getTariff().getName()));
+                log.info(String.format("[%s] Услуга по тарифу %s восстановлена", user, service.getTariff().getName()));
             }
         }
 
@@ -72,7 +73,7 @@ public class BalanceService {
         ) {
 
             if (user.getBalance() <= 0) {
-                System.out.println(String.format("[%s] Услуги приостановлены. Недостаточно средств %.2f", user, user.getBalance()));
+                log.info(String.format("[%s] Услуги приостановлены. Недостаточно средств", user));
                 continue;
             }
 
@@ -89,7 +90,7 @@ public class BalanceService {
 
             userRepo.save(user);
 
-            System.out.println(String.format("[%s] Списание средств %.2f. Баланс составляет %.2f", user, sum, newBalance));
+            log.info(String.format("[%s] Списание средств %.2f", user, sum));
 
             if (newBalance <= 0) {
                 deactivateServices(activatedUserServices);
@@ -103,7 +104,7 @@ public class BalanceService {
             service.setIsActivated(false);
             userTariffRepo.save(service);
 
-            System.out.println(String.format("[%s] Недостаточно средств на счету. Услуга по тарифу %s отключена",
+            log.info(String.format("[%s] Недостаточно средств на счету. Услуга по тарифу %s отключена",
                     service.getUser(), service.getTariff().getName()));
         }
     }
