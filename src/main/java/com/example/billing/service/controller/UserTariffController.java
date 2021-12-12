@@ -4,15 +4,16 @@ import com.example.billing.service.entity.UserTariffEntity;
 import com.example.billing.service.exception.NotFoundTariffByIdExtension;
 import com.example.billing.service.exception.NotFoundUserByIdExtension;
 import com.example.billing.service.service.UserTariffService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("services")
 public class UserTariffController {
-    @Autowired
-    private UserTariffService userTariffService;
+    private final UserTariffService userTariffService;
 
     @PostMapping
     public ResponseEntity addService(@RequestBody UserTariffEntity service, @RequestParam Long userId, @RequestParam Long tariffId) {

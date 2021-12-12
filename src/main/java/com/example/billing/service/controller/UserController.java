@@ -2,15 +2,16 @@ package com.example.billing.service.controller;
 
 import com.example.billing.service.entity.UserEntity;
 import com.example.billing.service.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping
     public ResponseEntity addUser(@RequestBody UserEntity user) {

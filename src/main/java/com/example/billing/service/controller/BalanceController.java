@@ -1,6 +1,7 @@
 package com.example.billing.service.controller;
 
 import com.example.billing.service.service.BalanceService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -9,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/balances")
 public class BalanceController {
-    @Autowired
-    private BalanceService balanceService;
+    private final BalanceService balanceService;
 
     @PutMapping
     public ResponseEntity topUpBalance(@RequestParam Long userId, @RequestParam Double value) {

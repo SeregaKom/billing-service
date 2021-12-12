@@ -2,15 +2,16 @@ package com.example.billing.service.controller;
 
 import com.example.billing.service.entity.TariffEntity;
 import com.example.billing.service.service.TariffService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/tariffs")
 public class TariffController {
-    @Autowired
-    private TariffService tariffService;
+    private final TariffService tariffService;
 
     @PostMapping
     public ResponseEntity addTariff(@RequestBody TariffEntity tariff) {
