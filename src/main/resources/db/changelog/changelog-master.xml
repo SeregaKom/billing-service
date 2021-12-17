@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
-    
+
     <include file="db/changelog/changeset/V1__create_user_table.xml"></include>
     <include file="db/changelog/changeset/V2__create_tariff_table.xml"></include>
     <include file="db/changelog/changeset/V3__create_services_table.xml"></include>
