@@ -11,18 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 class BillingServiceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
-	@ActiveProfiles("test")
-	@SpringBootTest
-	@ContextConfiguration(initializers = {Postgres.Initializer.class})
-	@Transactional
-	public abstract static class IntegrationTestBase {
-		@BeforeAll
-		static void init() {
-			Postgres.postgresqlContainer.start();
-		}
-	}
+    @ActiveProfiles("test")
+    @SpringBootTest
+    @ContextConfiguration(initializers = {Postgres.Initializer.class})
+    @Transactional
+    public abstract static class IntegrationTestBase {
+        @BeforeAll
+        static void init() {
+            Postgres.postgresqlContainer.start();
+        }
+    }
 }
