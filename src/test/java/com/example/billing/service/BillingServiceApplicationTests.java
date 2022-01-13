@@ -17,8 +17,6 @@ class BillingServiceApplicationTests {
 
     @ActiveProfiles("test")
     @SpringBootTest
-    @ContextConfiguration(initializers = {Postgres.Initializer.class})
-    @Transactional
     public abstract static class IntegrationTestBase {
         @BeforeAll
         static void init() {
