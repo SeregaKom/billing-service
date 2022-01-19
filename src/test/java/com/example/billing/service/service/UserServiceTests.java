@@ -1,15 +1,14 @@
-package com.example.billing.service;
+package com.example.billing.service.service;
 
 import com.example.billing.service.entity.UserEntity;
 import com.example.billing.service.service.UserService;
+import com.example.billing.service.utils.AbstractIntegrationTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 //TODO: пока что такие говенные тесты
-public class UserServiceTests extends AbstractIntegrationTest{
+public class UserServiceTests extends AbstractIntegrationTest {
     @Autowired
     private UserService userService;
 
