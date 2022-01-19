@@ -1,6 +1,5 @@
 package com.example.billing.service.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,11 +7,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tariffs")
-@Data
+@Getter
+@Setter
 public class TariffEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "price_per_minute")
     private double pricePerMinute;
 }
