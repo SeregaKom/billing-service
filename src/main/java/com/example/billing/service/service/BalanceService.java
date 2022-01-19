@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.StreamSupport;
@@ -78,7 +79,7 @@ public class BalanceService {
             }
 
             var activatedUserServices = allServices
-                    .filter(service -> service.getUser().getId() == user.getId() && service.getIsActivated()).toList();
+                    .filter(service -> Objects.equals(service.getUser().getId(), user.getId()) && service.getIsActivated()).toList();
 
             var sum = activatedUserServices.stream()
                     .map(service -> service.getTariff().getPricePerMinute())
