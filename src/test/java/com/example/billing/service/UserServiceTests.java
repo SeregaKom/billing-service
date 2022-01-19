@@ -9,9 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 //TODO: пока что такие говенные тесты
-@SpringBootTest
-@Testcontainers
-public class UserServiceTests {
+public class UserServiceTests extends AbstractIntegrationTest{
     @Autowired
     private UserService userService;
 
