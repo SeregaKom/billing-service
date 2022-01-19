@@ -15,37 +15,21 @@ public class TariffController {
 
     @PostMapping
     public ResponseEntity addTariff(@RequestBody TariffEntity tariff) {
-        try {
-            return ResponseEntity.ok(tariffService.addTariff(tariff));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(tariffService.addTariff(tariff));
     }
 
     @PutMapping
     public ResponseEntity updateTariff(@RequestBody TariffEntity tariff) {
-        try {
-            return ResponseEntity.ok(tariffService.updateTariff(tariff));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(tariffService.updateTariff(tariff));
     }
 
     @GetMapping
     public ResponseEntity getTariff(@RequestParam Long id) {
-        try {
-            return ResponseEntity.ok(tariffService.getTariff(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(tariffService.getTariff(id));
     }
 
     @DeleteMapping
     public ResponseEntity deleteTariff(@RequestParam Long id) {
-        try {
-            return ResponseEntity.ok(tariffService.deleteTariff(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(tariffService.deleteTariff(id));
     }
 }

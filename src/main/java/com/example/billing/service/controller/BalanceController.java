@@ -17,11 +17,8 @@ public class BalanceController {
 
     @PutMapping
     public ResponseEntity topUpBalance(@RequestParam Long userId, @RequestParam Double value) {
-        try {
-            var newBalance = balanceService.topUpBalance(userId, value);
-            return ResponseEntity.ok(String.format("Баланс успешно пополнен и составляет %.2f", newBalance));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(String.format("Не удалось пополнить баланс. Ошибка: %s", e.getMessage()));
-        }
+
+        var newBalance = balanceService.topUpBalance(userId, value);
+        return ResponseEntity.ok(String.format("Баланс успешно пополнен и составляет %.2f", newBalance));
     }
 }
