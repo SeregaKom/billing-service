@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -29,28 +31,28 @@ public class BalanceService {
      * @param value  Сумма для зачислления
      * @return
      */
-    public Double topUpBalance(Long userId, Double value) {
-        var user = userRepo.findById(userId).get();
+    public Optional<Double> topUpBalance(Long userId, Double value) {
 
-        var balance = user.getBalance() + value;
-        user.setBalance(balance);
+        return userRepo.findById(userId)
+                .map(user -> user.setBalance(user.getBalance() + value))
+                .map(userRepo::save)
+                .map(UserEntity::getBalance)
+                .map(balance -> updateTariffs(userId, balance));
+    }
 
-        userRepo.save(user);
-
-        if (balance > 0) {
-            var services = StreamSupport.stream(userTariffRepo.findByUserId(userId).spliterator(), false);
-            var deactivateServices = services
-                    .filter(service -> service.getIsActivated() == false)
-                    .toList();
-
-            for (var service :
-                    deactivateServices) {
-                service.setIsActivated(true);
-                userTariffRepo.save(service);
-
-                log.info(String.format("[%s] Услуга по тарифу %s восстановлена", user, service.getTariff().getName()));
-            }
+    private Double updateTariffs(Long userId, Double balance) {
+        if (balance <= 0) {
+            return balance;
         }
+
+        var services = userTariffRepo.findByUserId(userId).stream()
+                .filter(service -> !service.getIsActivated())
+                .peek(service -> {
+                    service.setIsActivated(Boolean.TRUE);
+                    log.info(String.format("[%s] Услуга по тарифу %s восстановлена", userId, service.getTariff().getName()));
+                })
+                .collect(Collectors.toList());
+        userTariffRepo.saveAll(services);
 
         return balance;
     }
@@ -67,6 +69,7 @@ public class BalanceService {
         timer.schedule(timerTask, 0, 60000);
     }
 
+    //TODO Заюзать спринговый шедулер
     private void writeOffAmount() {
         var allServices = StreamSupport.stream(userTariffRepo.findAll().spliterator(), false);
         var users = userRepo.findAll();
