@@ -16,9 +16,10 @@ public class BalanceController {
     private final BalanceService balanceService;
 
     @PutMapping
-    public ResponseEntity topUpBalance(@RequestParam Long userId, @RequestParam Double value) {
-
-        var newBalance = balanceService.topUpBalance(userId, value);
-        return ResponseEntity.ok(String.format("Баланс успешно пополнен и составляет %.2f", newBalance));
+    public ResponseEntity<String> topUpBalance(@RequestParam Long userId, @RequestParam Double value) {
+        return balanceService.topUpBalance(userId, value)
+                //TODO dto ненадо на фронт отвечать текстом
+                .map(x -> ResponseEntity.ok(String.format("Баланс успешно пополнен и составляет %.2f", x)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
