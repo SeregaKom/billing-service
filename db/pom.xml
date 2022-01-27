@@ -17,13 +17,6 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-
-        <liquibase.host>localhost</liquibase.host>
-        <liquibase.port>5432</liquibase.port>
-        <liquibase.db>postgres</liquibase.db>
-        <liquibase.schema>billings</liquibase.schema>
-        <liquibase.user>billings</liquibase.user>
-        <liquibase.password>billings</liquibase.password>
     </properties>
 
     <build>
