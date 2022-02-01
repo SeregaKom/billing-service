@@ -1,24 +1,20 @@
 package com.example.billing.service.service;
+
 import com.example.billing.service.entity.Service;
-import com.example.billing.service.repository.UserRepo;
 import com.example.billing.service.entity.User;
+import com.example.billing.service.repository.UserRepo;
 import com.example.billing.service.repository.UserTariffRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @org.springframework.stereotype.Service
 @RequiredArgsConstructor
 @Slf4j
-@Component
 public class BalanceService {
     private final UserRepo userRepo;
     private final UserTariffRepo userTariffRepo;
@@ -58,7 +54,7 @@ public class BalanceService {
 
     @Scheduled(cron = "0 0/1 * * * *")
     private void writeOffAmount() {
-        var allServices = StreamSupport.stream(userTariffRepo.findAll().spliterator(), false);
+        var allServices = userTariffRepo.findAll();
         var users = userRepo.findAll();
         for (User user : users
         ) {
@@ -69,8 +65,10 @@ public class BalanceService {
                     continue;
                 }
 
-                var activatedUserServices = allServices
-                        .filter(service -> Objects.equals(service.getUser().getId(), user.getId()) && service.getIsActivated()).toList();
+                var activatedUserServices = allServices.stream()
+                        .filter(service -> Objects.equals(service.getUser().getId(), user.getId())
+                                && service.getIsActivated())
+                        .toList();
 
                 var sum = activatedUserServices.stream()
                         .map(service -> service.getTariff().getPricePerMinute())
@@ -90,6 +88,7 @@ public class BalanceService {
             }
             catch (RuntimeException e){
                 log.error(e.getMessage());
+                throw e;
             }
         }
     }
