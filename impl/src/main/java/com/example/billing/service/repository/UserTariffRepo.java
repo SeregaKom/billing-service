@@ -1,10 +1,12 @@
 package com.example.billing.service.repository;
 
 import com.example.billing.service.entity.Service;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface UserTariffRepo extends CrudRepository<Service, Long> {
+@Repository
+public interface UserTariffRepo extends JpaRepository<Service, Long> {
     List<Service> findByUserId(Long userId);
 }
