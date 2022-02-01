@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class Service {
+public class Turn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

@@ -1,18 +1,20 @@
 package com.example.billing.service.service;
 
-import com.example.billing.service.entity.Service;
+import com.example.billing.service.entity.Turn;
 import com.example.billing.service.entity.User;
 import com.example.billing.service.repository.UserRepo;
 import com.example.billing.service.repository.UserTariffRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@org.springframework.stereotype.Service
+@Service
 @RequiredArgsConstructor
 @Slf4j
 public class BalanceService {
@@ -93,7 +95,7 @@ public class BalanceService {
         }
     }
 
-    private void deactivateServices(List<Service> activatedUserServices) {
+    private void deactivateServices(List<Turn> activatedUserServices) {
         for (var service :
                 activatedUserServices) {
             service.setIsActivated(false);
