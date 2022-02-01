@@ -7,5 +7,5 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface UserMapper extends AbstractMapper<User, UserDto>{
-    UserMapper USER_MAPPER = Mappers.getMapper(UserMapper.class);
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 }

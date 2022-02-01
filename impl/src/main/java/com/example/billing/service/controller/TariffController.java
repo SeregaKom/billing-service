@@ -1,6 +1,8 @@
 package com.example.billing.service.controller;
 
+import com.example.billing.service.dto.TariffDto;
 import com.example.billing.service.entity.Tariff;
+import com.example.billing.service.mapper.TariffMapper;
 import com.example.billing.service.service.TariffService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,22 +15,28 @@ public class TariffController {
     private final TariffService tariffService;
 
     @PostMapping
-    public ResponseEntity addTariff(@RequestBody Tariff tariff) {
-        return ResponseEntity.ok(tariffService.addTariff(tariff));
+    public ResponseEntity<TariffDto> addTariff(@RequestBody TariffDto tariffDto) {
+        var tariff = tariffService.addTariff(TariffMapper.INSTANCE.toDomainModel(tariffDto));
+
+        return ResponseEntity.ok(TariffMapper.INSTANCE.toDto(tariff));
     }
 
     @PutMapping
-    public ResponseEntity updateTariff(@RequestBody Tariff tariff) {
-        return ResponseEntity.ok(tariffService.updateTariff(tariff));
+    public ResponseEntity<TariffDto> updateTariff(@RequestBody TariffDto tariffDto) {
+        var tariff = tariffService.updateTariff(TariffMapper.INSTANCE.toDomainModel(tariffDto));
+
+        return ResponseEntity.ok(TariffMapper.INSTANCE.toDto(tariff));
     }
 
     @GetMapping
-    public ResponseEntity getTariff(@RequestParam Long id) {
-        return ResponseEntity.ok(tariffService.getTariff(id));
+    public ResponseEntity<TariffDto> getTariff(@RequestParam Long id) {
+
+        return ResponseEntity.ok(TariffMapper.INSTANCE.toDto(tariffService.getTariff(id)));
     }
 
     @DeleteMapping
-    public ResponseEntity deleteTariff(@RequestParam Long id) {
+    public ResponseEntity<Long> deleteTariff(@RequestParam Long id) {
+
         return ResponseEntity.ok(tariffService.deleteTariff(id));
     }
 }

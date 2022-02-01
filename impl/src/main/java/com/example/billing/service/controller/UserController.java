@@ -15,23 +15,23 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
-        var user = userService.addUser(UserMapper.USER_MAPPER.toDomainModel(userDto));
+        var user = userService.addUser(UserMapper.INSTANCE.toDomainModel(userDto));
 
-        return ResponseEntity.ok(UserMapper.USER_MAPPER.toDto(user));
+        return ResponseEntity.ok(UserMapper.INSTANCE.toDto(user));
     }
 
     @PutMapping
     public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
-        var user = userService.updateUser(UserMapper.USER_MAPPER.toDomainModel(userDto));
+        var user = userService.updateUser(UserMapper.INSTANCE.toDomainModel(userDto));
 
-        return ResponseEntity.ok(UserMapper.USER_MAPPER.toDto(user));
+        return ResponseEntity.ok(UserMapper.INSTANCE.toDto(user));
     }
 
     @GetMapping
     public ResponseEntity<UserDto> getUser(@RequestParam Long id) {
         var user = userService.getUser(id);
 
-        return ResponseEntity.ok(UserMapper.USER_MAPPER.toDto(user));
+        return ResponseEntity.ok(UserMapper.INSTANCE.toDto(user));
     }
 
     @DeleteMapping
