@@ -1,11 +1,10 @@
 package com.example.billing.service.service;
-import com.example.billing.service.entity.UserTariffEntity;
+import com.example.billing.service.entity.Service;
 import com.example.billing.service.repository.UserRepo;
-import com.example.billing.service.entity.UserEntity;
+import com.example.billing.service.entity.User;
 import com.example.billing.service.repository.UserTariffRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.TimerTask;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@Service
+@org.springframework.stereotype.Service
 @RequiredArgsConstructor
 @Slf4j
 public class BalanceService {
@@ -35,7 +34,7 @@ public class BalanceService {
         return userRepo.findById(userId)
                 .map(user -> user.setBalance(user.getBalance() + value))
                 .map(userRepo::save)
-                .map(UserEntity::getBalance)
+                .map(User::getBalance)
                 .map(balance -> updateTariffs(userId, balance));
     }
 
@@ -72,7 +71,7 @@ public class BalanceService {
     private void writeOffAmount() {
         var allServices = StreamSupport.stream(userTariffRepo.findAll().spliterator(), false);
         var users = userRepo.findAll();
-        for (UserEntity user : users
+        for (User user : users
         ) {
 
             if (user.getBalance() <= 0) {
@@ -101,7 +100,7 @@ public class BalanceService {
         }
     }
 
-    private void deactivateServices(List<UserTariffEntity> activatedUserServices) {
+    private void deactivateServices(List<Service> activatedUserServices) {
         for (var service :
                 activatedUserServices) {
             service.setIsActivated(false);

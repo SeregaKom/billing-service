@@ -1,6 +1,6 @@
 package com.example.billing.service.service;
 
-import com.example.billing.service.entity.UserEntity;
+import com.example.billing.service.entity.User;
 import com.example.billing.service.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class UserService {
      * @param user Пользователь
      * @return
      */
-    public UserEntity addUser(UserEntity user) {
+    public User addUser(User user) {
         return userRepo.save(user);
     }
 
@@ -22,7 +22,7 @@ public class UserService {
      * @param user Пользователь
      * @return
      */
-    public UserEntity updateUser(UserEntity user){
+    public User updateUser(User user){
         return userRepo.save(user);
     }
 
@@ -30,7 +30,7 @@ public class UserService {
      * @param id Идентификатор пользователя
      * @return
      */
-    public UserEntity getUser(Long id) {
+    public User getUser(Long id) {
         return userRepo.findById(id).get();
     }
 

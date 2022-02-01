@@ -7,24 +7,25 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "services")
+@Table(name = "users")
 @Getter
 @Setter
 @Accessors(chain = true)
-public class UserTariffEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "is_activated")
-    private Boolean isActivated;
+    @Column(name = "name")
+    private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @Column(name = "surname")
+    private String surname;
 
-    @OneToOne
-    @JoinColumn(name = "tariff_id")
-    private TariffEntity tariff;
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "balance")
+    private Double balance;
 }

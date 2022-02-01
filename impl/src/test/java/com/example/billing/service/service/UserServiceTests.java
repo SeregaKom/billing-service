@@ -1,6 +1,6 @@
 package com.example.billing.service.service;
 
-import com.example.billing.service.entity.UserEntity;
+import com.example.billing.service.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ public class UserServiceTests extends AbstractIntegrationTest {
 
     @Test
     public void testAddUser() {
-        var user = new UserEntity();
+        var user = new User();
         user.setName("Иван");
         user.setSurname("Иванов");
         user.setAddress("Нижние низы");
@@ -28,7 +28,7 @@ public class UserServiceTests extends AbstractIntegrationTest {
 
     @Test
     public void testUpdateUser() {
-        var user = new UserEntity();
+        var user = new User();
         user.setName("Иван");
         user.setSurname("Иванов");
         user.setAddress("Нижние низы");
@@ -52,7 +52,7 @@ public class UserServiceTests extends AbstractIntegrationTest {
 
     @Test
     public void testGetUser() {
-        var user = new UserEntity();
+        var user = new User();
         user.setName("Иван");
         user.setSurname("Иванов");
         user.setAddress("Нижние низы");
@@ -73,7 +73,7 @@ public class UserServiceTests extends AbstractIntegrationTest {
 
     @Test
     public void testDeleteUser() {
-        var user = new UserEntity();
+        var user = new User();
         user.setName("Иван");
         user.setSurname("Иванов");
         user.setAddress("Нижние низы");

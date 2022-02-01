@@ -1,6 +1,6 @@
 package com.example.billing.service.controller;
 
-import com.example.billing.service.entity.TariffEntity;
+import com.example.billing.service.entity.Tariff;
 import com.example.billing.service.service.TariffService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +13,12 @@ public class TariffController {
     private final TariffService tariffService;
 
     @PostMapping
-    public ResponseEntity addTariff(@RequestBody TariffEntity tariff) {
+    public ResponseEntity addTariff(@RequestBody Tariff tariff) {
         return ResponseEntity.ok(tariffService.addTariff(tariff));
     }
 
     @PutMapping
-    public ResponseEntity updateTariff(@RequestBody TariffEntity tariff) {
+    public ResponseEntity updateTariff(@RequestBody Tariff tariff) {
         return ResponseEntity.ok(tariffService.updateTariff(tariff));
     }
 

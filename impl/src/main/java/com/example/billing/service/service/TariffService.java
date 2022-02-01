@@ -1,7 +1,6 @@
 package com.example.billing.service.service;
 
-import com.example.billing.service.entity.TariffEntity;
-import com.example.billing.service.entity.UserEntity;
+import com.example.billing.service.entity.Tariff;
 import com.example.billing.service.repository.TariffRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,7 @@ public class TariffService {
      * @param tariff Тариф
      * @return
      */
-    public TariffEntity addTariff(TariffEntity tariff) {
+    public Tariff addTariff(Tariff tariff) {
         return tariffRepo.save(tariff);
     }
 
@@ -23,7 +22,7 @@ public class TariffService {
      * @param tariff Тариф
      * @return
      */
-    public TariffEntity updateTariff(TariffEntity tariff){
+    public Tariff updateTariff(Tariff tariff){
         return tariffRepo.save(tariff);
     }
 
@@ -31,7 +30,7 @@ public class TariffService {
      * @param id Идентификатор тарифа
      * @return
      */
-    public TariffEntity getTariff(Long id) {
+    public Tariff getTariff(Long id) {
         return tariffRepo.findById(id).get();
     }
 

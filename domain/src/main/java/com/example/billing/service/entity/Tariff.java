@@ -2,16 +2,14 @@ package com.example.billing.service.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "tariffs")
 @Getter
 @Setter
-@Accessors(chain = true)
-public class UserEntity {
+public class Tariff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -20,12 +18,6 @@ public class UserEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "surname")
-    private String surname;
-
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "balance")
-    private Double balance;
+    @Column(name = "price_per_minute")
+    private double pricePerMinute;
 }

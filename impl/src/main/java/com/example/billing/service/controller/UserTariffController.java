@@ -1,6 +1,6 @@
 package com.example.billing.service.controller;
 
-import com.example.billing.service.entity.UserTariffEntity;
+import com.example.billing.service.entity.Service;
 import com.example.billing.service.service.UserTariffService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +13,12 @@ public class UserTariffController {
     private final UserTariffService userTariffService;
 
     @PostMapping
-    public ResponseEntity addService(@RequestBody UserTariffEntity service, @RequestParam Long userId, @RequestParam Long tariffId) {
+    public ResponseEntity addService(@RequestBody Service service, @RequestParam Long userId, @RequestParam Long tariffId) {
         return ResponseEntity.ok(userTariffService.addService(service, userId, tariffId));
     }
 
     @PutMapping
-    public ResponseEntity updateService(@RequestBody UserTariffEntity service, @RequestParam Long userId, @RequestParam Long tariffId) {
+    public ResponseEntity updateService(@RequestBody Service service, @RequestParam Long userId, @RequestParam Long tariffId) {
         return ResponseEntity.ok(userTariffService.updateService(service, userId, tariffId));
     }
 

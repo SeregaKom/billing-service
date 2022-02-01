@@ -1,6 +1,6 @@
 package com.example.billing.service.service;
 
-import com.example.billing.service.entity.UserTariffEntity;
+import com.example.billing.service.entity.Service;
 import com.example.billing.service.exception.NotFoundServiceByIdException;
 import com.example.billing.service.exception.NotFoundTariffByIdException;
 import com.example.billing.service.exception.NotFoundUserByIdException;
@@ -8,9 +8,8 @@ import com.example.billing.service.repository.TariffRepo;
 import com.example.billing.service.repository.UserRepo;
 import com.example.billing.service.repository.UserTariffRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@org.springframework.stereotype.Service
 @RequiredArgsConstructor
 public class UserTariffService {
     private final UserTariffRepo userTariffRepo;
@@ -25,7 +24,7 @@ public class UserTariffService {
      * @param tariffId Идентификатор тарифа
      * @return
      */
-    public UserTariffEntity addService(UserTariffEntity service, Long userId, Long tariffId)
+    public Service addService(Service service, Long userId, Long tariffId)
             throws NotFoundUserByIdException, NotFoundTariffByIdException {
         var user = userRepo.findById(userId)
                 .orElseThrow(() -> new NotFoundUserByIdException(userId));
@@ -46,7 +45,7 @@ public class UserTariffService {
      * @param tariffId Идентификатор тарифа
      * @return
      */
-    public UserTariffEntity updateService(UserTariffEntity service, Long userId, Long tariffId)
+    public Service updateService(Service service, Long userId, Long tariffId)
             throws NotFoundUserByIdException, NotFoundTariffByIdException {
         var user = userRepo.findById(userId)
                 .orElseThrow(() -> new NotFoundUserByIdException(userId));
@@ -65,7 +64,7 @@ public class UserTariffService {
      * @param id Идентификатор услуги
      * @return
      */
-    public UserTariffEntity getService(Long id) {
+    public Service getService(Long id) {
         return userTariffRepo.findById(id).orElseThrow(()-> new NotFoundServiceByIdException(id));
     }
 
