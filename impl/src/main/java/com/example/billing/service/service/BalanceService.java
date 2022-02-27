@@ -28,13 +28,14 @@ public class BalanceService {
      * @param value  Сумма для зачислления
      * @return
      */
-    public Optional<Double> topUpBalance(Long userId, Double value) {
+    public double topUpBalance(Long userId, Double value) {
 
-        return userRepo.findById(userId)
+        return  userRepo.findById(userId)
                 .map(user -> user.setBalance(user.getBalance() + value))
                 .map(userRepo::save)
                 .map(User::getBalance)
-                .map(balance -> updateTariffs(userId, balance));
+                .map(balance -> updateTariffs(userId, balance))
+                .orElseThrow();
     }
 
     private Double updateTariffs(Long userId, Double balance) {
