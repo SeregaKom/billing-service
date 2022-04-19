@@ -25,7 +25,7 @@ public class BalanceService {
      * Пополнить баланс
      *
      * @param userId Идентификатор пользователя
-     * @param value  Сумма для зачислления
+     * @param value Сумма для зачислления
      * @return
      */
     public double topUpBalance(Long userId, Double value) {
