@@ -20,7 +20,7 @@ public class UserTariffService {
     /**
      * Подключить услугу
      *
-     * @param service  Услуга
+     * @param service Услуга
      * @param userId   Идентификатор пользователя
      * @param tariffId Идентификатор тарифа
      * @return
