@@ -71,7 +71,7 @@ public class BalanceService {
                 var activatedUserServices = allServices.stream()
                         .filter(service -> Objects.equals(service.getUser().getId(), user.getId())
                                 && service.getIsActivated())
-                        .toList();
+                        .collect(Collectors.toList());
 
                 var sum = activatedUserServices.stream()
                         .map(service -> service.getTariff().getPricePerMinute())
